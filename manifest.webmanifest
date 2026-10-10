@@ -1,0 +1,31 @@
+{
+  "name": "前台 · 酒店管理系统",
+  "short_name": "前台",
+  "description": "单体酒店前台管理系统：房态、客单、统计、交接班",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f5f2",
+  "theme_color": "#5a3a22",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "房态", "url": "./index.html#/rooms" },
+    { "name": "客单", "url": "./index.html#/orders" }
+  ]
+}
