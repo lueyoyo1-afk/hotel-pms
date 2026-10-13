@@ -1,0 +1,200 @@
+/* ============================================================
+   Stone & Lamp · 设计令牌
+   纸白 · 墨黑 · 一盏琥珀灯
+   全部使用 sRGB（hex/rgba），兼容旧 WebView（iOS 15+ 等），
+   不依赖 oklch / color-mix。
+   ============================================================ */
+
+:root {
+  --n-0: #fdfbfa;
+  --n-50: #f7f5f1;
+  --n-100: #eeeae5;
+  --n-300: #d5d0c9;
+  --n-400: #979189;
+  --n-600: #5b544b;
+  --n-800: #2e281f;
+  --n-900: #1a150f;
+
+  --brand: #63341e;
+  --brand-hover: #56250d;
+  --brand-soft: #fee5db;
+  --on-brand: #fdfbfa;
+  --accent: #d49824;
+  --ok: #458b68;
+  --warn: #e2a520;
+  --danger: #c13f29;
+
+  /* 房态 7 态 */
+  --st-vc: #f4fcf8;
+  --st-oc: #322d26;
+  --st-vd: #ffc54d;
+  --st-due: #c64e31;
+  --st-res: #dff6ff;
+  --st-ooo: #ece7e1;
+
+  /* 房态文字 */
+  --st-vc-ink: #355547;
+  --st-oc-ink: #f7f5f1;
+  --st-vd-ink: #452e00;
+  --st-due-ink: #fffbf9;
+  --st-res-ink: #295b77;
+  --st-ooo-ink: #625d55;
+  --st-vc-line: #bad5c8;
+
+  /* 派生色（原 color-mix 预计算） */
+  --badge-due-bg: #fbe9e3;
+  --badge-due-line: #dd9583;
+  --badge-amb-bg: #fdf3dc;
+  --badge-amb-line: #ecc27e;
+  --due-bar: #933d26;
+  --dot-due: rgba(255, 251, 249, 0.8);
+  --dot-vc: rgba(53, 85, 71, 0.55);
+  --res-line: rgba(41, 91, 119, 0.6);
+  --ooo-line: rgba(98, 93, 85, 0.45);
+  --confirm-bg: #fbeeeb;
+  --warnbar-bg: #fbf1dd;
+  --brand-35: rgba(99, 52, 30, 0.35);
+  --brand-55: rgba(99, 52, 30, 0.55);
+  --od-stripe: rgba(255, 255, 255, 0.09);
+  --ooo-stripe: rgba(52, 45, 35, 0.1);
+
+  --hair: #dbd7d1;
+  --sh-1: 0 1px 2px rgba(46, 41, 36, 0.06);
+  --sh-2: 0 6px 20px -6px rgba(46, 41, 36, 0.14);
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-card: 14px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  --fs-2xs: clamp(10px, 0.62rem + 0.1vw, 11px);
+  --fs-xs: clamp(11px, 0.68rem + 0.12vw, 12px);
+  --fs-sm: clamp(13px, 0.8rem + 0.2vw, 15px);
+  --fs-md: clamp(15px, 0.92rem + 0.25vw, 17px);
+  --fs-lg: clamp(18px, 1.1rem + 0.4vw, 22px);
+  --fs-2xl: clamp(28px, 1.7rem + 1.2vw, 40px);
+  --fs-room: clamp(20px, 1.2rem + 0.6vw, 26px);
+
+  --font-display: 'Source Han Serif SC', 'Noto Serif SC', 'Songti SC', STSong, SimSun, Georgia,
+    serif;
+  --font-body: system-ui, -apple-system, 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei',
+    'Noto Sans SC', sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+  --t-micro: 120ms;
+  --t-base: 180ms;
+  --t-panel: 240ms;
+  --t-num: 600ms;
+
+  /* 语义层（浅色 = 中性色阶） */
+  --bg: var(--n-50);
+  --surface: var(--n-0);
+  --surface-2: var(--n-100);
+  --line: var(--hair);
+  --ink: var(--n-900);
+  --ink-2: var(--n-600);
+  --ink-3: var(--n-400);
+  --overlay: rgba(25, 21, 17, 0.32);
+  --deposit-bg: #f2eee9;
+
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+  /* WebView 常把安全区算得过大，封顶避免顶部黑带 / 底部大块空白 */
+  --safe-t-capped: min(var(--safe-t), 12px);
+  --safe-b-capped: min(var(--safe-b), 20px);
+  --appbar-h: 52px;
+  --appbar-real: calc(var(--appbar-h) + var(--safe-t-capped));
+  /* 吸顶元素高度由 JS 实测同步（见 lib/sticky.ts），以下为兜底值 */
+  --metric-h: 96px;
+  --filter-h: 56px;
+  --group-h: 34px;
+  --tabbar-h: 56px;
+  --sidebar-w: 208px;
+  --detail-w: 360px;
+}
+
+/* ---------- 深色：暖黑反相，低明度色度收敛 ---------- */
+:root[data-theme='dark'] {
+  /* 页面底最深，卡片逐级提亮形成浮起层次 */
+  --n-0: #211d17;
+  --n-50: #16120e;
+  --n-100: #2a251e;
+  --n-300: #3d372f;
+  --n-400: #6e6860;
+  --n-600: #a9a49c;
+  --n-800: #d5d0ca;
+  --n-900: #ebe7e2;
+
+  --brand: #ce8d6f;
+  --brand-hover: #e8a587;
+  --brand-soft: #3d281f;
+  --on-brand: #2b1a10;
+  --accent: #e5ac4c;
+  --ok: #65a281;
+  --warn: #d2a249;
+  --danger: #e17460;
+
+  --st-vc: #1f2623;
+  --st-oc: #4c4741;
+  --st-vd: #e3ad4b;
+  --st-due: #a33e25;
+  --st-res: #1f303b;
+  --st-ooo: #34302a;
+
+  --st-vc-ink: #9dc9b5;
+  --st-oc-ink: #f0eeeb;
+  --st-vd-ink: #331c00;
+  --st-due-ink: #fffbf9;
+  --st-res-ink: #92bed9;
+  --st-ooo-ink: #b0aaa1;
+  --st-vc-line: #394d44;
+
+  --badge-due-bg: #26160f;
+  --badge-due-line: #673829;
+  --badge-amb-bg: #41321a;
+  --badge-amb-line: #9b7b41;
+  --due-bar: #7a321e;
+  --dot-due: rgba(255, 251, 249, 0.8);
+  --dot-vc: rgba(157, 201, 181, 0.55);
+  --res-line: rgba(146, 190, 217, 0.6);
+  --ooo-line: rgba(176, 170, 161, 0.45);
+  --confirm-bg: #211611;
+  --warnbar-bg: #332916;
+  --brand-35: rgba(206, 141, 111, 0.35);
+  --brand-55: rgba(206, 141, 111, 0.55);
+  --od-stripe: rgba(255, 255, 255, 0.07);
+  --ooo-stripe: rgba(255, 255, 255, 0.05);
+
+  --hair: #3d372f;
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sh-2: 0 6px 20px -6px rgba(0, 0, 0, 0.55);
+
+  --deposit-bg: #2a251e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-micro: 0ms;
+    --t-base: 0ms;
+    --t-panel: 0ms;
+    --t-num: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

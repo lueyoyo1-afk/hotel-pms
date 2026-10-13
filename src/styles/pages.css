@@ -1,0 +1,617 @@
+/* ============================================================
+   pages：房态 / 客单 / 统计 / 交接 / 更多 / 引导
+   ============================================================ */
+
+/* ---------- 房态页筛选条 ---------- */
+.filterbar {
+  position: sticky;
+  top: var(--metric-h);
+  z-index: 14;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-1);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filterbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .filterbar {
+    top: 0;
+    margin: var(--sp-2) var(--sp-4);
+  }
+}
+
+.filterbar .spacer {
+  flex: 1;
+  min-width: var(--sp-2);
+}
+
+.groups {
+  padding-bottom: var(--sp-6);
+}
+
+.group-block .room-grid-wrap {
+  padding: var(--sp-3) var(--sp-4);
+}
+
+@media (min-width: 900px) {
+  .group-block .room-grid-wrap {
+    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+  }
+}
+
+/* ---------- 统计页 ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: var(--sp-2) var(--sp-4) var(--sp-3);
+}
+
+@media (min-width: 700px) {
+  .stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.stat-cell {
+  padding: var(--sp-3) var(--sp-4);
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-1);
+  transition: box-shadow var(--t-micro) var(--ease-out);
+}
+
+.stat-cell:hover {
+  box-shadow: var(--sh-2);
+}
+
+.stat-cell .k {
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-cell .v {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  line-height: 1.2;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-cell .v small {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-left: 2px;
+}
+
+.stat-cell.hero {
+  grid-column: span 2;
+}
+
+@media (min-width: 700px) {
+  .stat-cell.hero {
+    grid-column: span 3;
+  }
+}
+
+.stat-cell.hero .v {
+  font-size: var(--fs-2xl);
+}
+
+.revenue-table {
+  width: calc(100% - 32px);
+  margin: 0 var(--sp-4);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-1);
+  overflow: hidden;
+}
+
+.revenue-table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+
+.revenue-table td.n {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.revenue-table tr.total td {
+  border-bottom: 0;
+  background: var(--brand-soft);
+  font-weight: 700;
+}
+
+.revenue-table tr.total td:first-child {
+  font-family: var(--font-display);
+}
+
+.revenue-table .sub {
+  color: var(--ink-3);
+  font-size: var(--fs-2xs);
+}
+
+.deposit-block {
+  margin: var(--sp-3) var(--sp-4) var(--sp-5);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--deposit-bg);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+}
+
+.deposit-block .v {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.chart-card {
+  border-top: 1px solid var(--line);
+  padding: var(--sp-3) var(--sp-4) var(--sp-5);
+}
+
+.chart-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.chart-card-head h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+}
+
+.donut-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.donut-row .chart-box {
+  flex: 0 0 148px;
+  width: 148px;
+}
+
+.donut-row .donut-legend {
+  flex: 1;
+  min-width: 150px;
+}
+
+.line-legend {
+  display: flex;
+  gap: var(--sp-4);
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  margin-top: var(--sp-2);
+}
+
+.note-line {
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+}
+
+/* ---------- 客单页 ---------- */
+.order-card {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  text-align: left;
+}
+
+.order-card:hover {
+  background: var(--surface-2);
+}
+
+.order-card .oc-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-card .oc-room {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-card .oc-name {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-card .oc-meta {
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-card .oc-right {
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.order-card .oc-fee {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.order-card .oc-due {
+  font-size: var(--fs-2xs);
+  color: var(--st-due);
+  margin-top: 2px;
+}
+
+/* ---------- 交接页 ---------- */
+.shift-item {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.shift-item .si-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+
+.shift-item .si-time {
+  margin-left: auto;
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.shift-item .si-body {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  white-space: pre-wrap;
+}
+
+/* ---------- 更多页 ---------- */
+.more-list {
+  margin: 0 var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+  overflow: hidden;
+}
+
+/* 页面首个列表与吸顶栏之间留呼吸空间 */
+.more-list:first-child {
+  margin-top: var(--sp-3);
+}
+
+.more-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  min-height: 56px;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  transition: background var(--t-micro) var(--ease-out);
+}
+
+.more-item:active {
+  background: var(--surface-2);
+}
+
+.more-item:last-child {
+  border-bottom: 0;
+}
+
+.more-item .mi-icon {
+  color: var(--ink-2);
+  flex: 0 0 auto;
+}
+
+.more-item .mi-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.more-item .mi-desc {
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.more-item .mi-right {
+  color: var(--ink-3);
+  font-size: var(--fs-2xs);
+}
+
+/* ---------- 房间/房型管理 ---------- */
+.manage-table {
+  width: calc(100% - 32px);
+  margin: 0 var(--sp-4) var(--sp-3);
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-xs);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-1);
+  overflow: hidden;
+}
+
+.manage-table th,
+.manage-table td {
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.manage-table th {
+  color: var(--ink-3);
+  font-weight: 500;
+  font-size: var(--fs-2xs);
+}
+
+.manage-table td.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.manage-table input,
+.manage-table select {
+  width: 100%;
+  min-height: 36px;
+  padding: 4px var(--sp-2);
+  border: 1px solid var(--n-300);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  font-size: var(--fs-xs);
+}
+
+.manage-table tr.is-deleted {
+  opacity: 0.5;
+}
+
+.manage-table tr.is-picked td {
+  background: var(--brand-soft);
+}
+
+.rooms-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.rooms-chips button {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: var(--sp-2) 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  background: var(--surface);
+  min-height: 44px;
+}
+
+.rooms-chips button.locked {
+  background: var(--surface-2);
+  color: var(--ink-3);
+}
+
+/* ---------- 引导 ---------- */
+.onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.onb-head {
+  padding: calc(var(--sp-5) + var(--safe-t)) var(--sp-5) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.onb-head .step {
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.onb-head h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  margin-top: var(--sp-1);
+}
+
+.onb-head p {
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  margin-top: var(--sp-1);
+}
+
+.onb-body {
+  flex: 1;
+  padding: var(--sp-4) var(--sp-5);
+  overflow-y: auto;
+}
+
+.onb-foot {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  padding-bottom: calc(var(--sp-3) + var(--safe-b-capped));
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.onb-foot .btn {
+  flex: 1;
+}
+
+.onb-alt {
+  padding: var(--sp-4) var(--sp-5) var(--sp-6);
+  border-top: 1px solid var(--line);
+}
+
+.onb-alt h4 {
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+  margin-bottom: var(--sp-2);
+}
+
+.preview-list {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.preview-list .pl {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.preview-list .pl:last-child {
+  border-bottom: 0;
+}
+
+.preview-list .pl .n {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.preview-list .pl .del {
+  margin-left: auto;
+  color: var(--danger);
+  font-size: var(--fs-2xs);
+}
+
+.floor-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.floor-picker button {
+  min-height: 36px;
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  background: var(--surface);
+}
+
+.floor-picker button[aria-pressed='true'] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
+}
+
+/* ---------- 快捷键说明 ---------- */
+.kbd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+}
+
+.kbd-table td {
+  padding: var(--sp-2) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.kbd-table td:first-child {
+  width: 120px;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 5px;
+  border: 1px solid var(--n-300);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: var(--fs-2xs);
+  text-align: center;
+  color: var(--ink-2);
+}
+
+/* ---------- 帮助弹层（? 键） ---------- */
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4) var(--sp-5);
+}
+
+.help-grid .hg {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  min-height: 32px;
+}
